@@ -6,9 +6,8 @@ public class LinearEquation
 	public LinearEquation(int dimensionality)
 	{
 		coEfficients = new double[dimensionality+1];
-		coEfficients[0] = 1;		// w0 is 1
-		// Initializing other coEfficients with 0
-		for(int i = 1; i < coEfficients.length; i++)
+		// Initializing coEfficients with 0
+		for(int i = 0; i < coEfficients.length; i++)
 		{
 			coEfficients[i] = 0;
 		}
