@@ -20,6 +20,10 @@ public class Main
 			learningRate = Double.parseDouble(args[2]);
 			
 			CSV_Reader csvReader = new CSV_Reader(csvFileLocation);
+			TrainingExample trainingExamples[] = csvReader.getTrainingExamples();
+			LinearEquation linearEquation = new LinearEquation(csvReader.dimensionalityOfData());
+			
+			LinearRegressor.startLearning(linearEquation, trainingExamples, learningRate, threshold);
 		}
 	}
 
