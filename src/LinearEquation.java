@@ -42,6 +42,7 @@ public class LinearEquation
 			System.out.println("Invalid position values");
 			return;
 		}
+		coEfficients[position] = value;
 	}
 	
 	/**
