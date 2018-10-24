@@ -4,16 +4,17 @@ public class LinearRegressor
 	public static void startLearning(LinearEquation linearEquation, TrainingExample trainingExamples[],
 			double learningRate, double threshold)
 	{
-		double meanSquareError = threshold + 1000;
+		double differenceInError = threshold + 1000;
+		double currentMeanSquareError = 0;
+		double previousMeanSquareError = 0;
 		int iterationNumber = 1;
 		
 		double tempCoEfficients[] = new double[linearEquation.dimensionality() + 1];
-		while(meanSquareError > threshold)
+		while(differenceInError > threshold)
 		{
 			// Calculation coefficients values
 			for(int currentDimension = 0; currentDimension <= linearEquation.dimensionality(); currentDimension++)
 			{
-				// Calculation for w0
 				double gradientValue = gradientValue(linearEquation, trainingExamples, currentDimension);
 				double coEfficientValue = linearEquation.getCoEfficientAt(currentDimension);
 				double newCoEfficient = coEfficientValue + (learningRate * gradientValue);
@@ -26,8 +27,11 @@ public class LinearRegressor
 				linearEquation.setCoEfficientAt(i, tempCoEfficients[i]);
 			}
 			
-			meanSquareError = meanSquareError(linearEquation, trainingExamples);
-			outputResult(linearEquation, iterationNumber, meanSquareError);
+			currentMeanSquareError = meanSquareError(linearEquation, trainingExamples);
+			differenceInError = Math.abs((currentMeanSquareError - previousMeanSquareError));
+			outputResult(linearEquation, iterationNumber, currentMeanSquareError);
+			
+			previousMeanSquareError = currentMeanSquareError;
 			iterationNumber++;
 		}
 	}
